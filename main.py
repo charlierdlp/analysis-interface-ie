@@ -5,7 +5,12 @@ def analyse_sales():
     print("\nRETRIEVE CLIENTS SALES INFORMATION\n")
     name = input("What is the name of the client ? ")
     data_clients = pd.read_excel("clients_sales.xlsx", sheet_name = "clients")                  # Read the excel file
-    client_number = data_clients[data_clients['name'] == name]['client number'].iloc[0]         # If the client number is not found   
+    client_number = data_clients[data_clients['name'] == name]['client number']                  # If the client number is not found   
+    if not client_number.empty:
+        client_number = client_number.iloc[0]
+    else:
+        analyse_sales()
+        return
 
     data_sales = pd.read_excel("clients_sales.xlsx", sheet_name = "sales")
     sales = data_sales[data_sales['Client number'] == client_number]['Client number'].count()   # Count the number times the client number appears in the sales sheet
