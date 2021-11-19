@@ -4,11 +4,12 @@ import pandas as pd
 def analyse_sales():
     print("\nRETRIEVE CLIENTS SALES INFORMATION\n")
     name = input("What is the name of the client ? ")
-    data_clients = pd.read_excel("clients_sales.xlsx", sheet_name = "clients")                  # Read the excel file
-    client_number = data_clients[data_clients['name'] == name]['client number']                  # If the client number is not found   
-    if not client_number.empty:
-        client_number = client_number.iloc[0]
+    data_clients = pd.read_excel("clients_sales.xlsx", sheet_name = "clients")                   # Read the excel file
+    client_number = data_clients[data_clients['name'] == name]['client number']                  # Match the client name with the client number   
+    if not client_number.empty:                                                                  # If the client number is found
+        client_number = client_number.iloc[0]                                                    # Get the client number               
     else:
+        print("Client not found\n")
         analyse_sales()
         return
 
