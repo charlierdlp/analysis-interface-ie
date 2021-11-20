@@ -9,7 +9,7 @@ def analyse_sales():
     if not client_number.empty:                                                                  # If the client number is found
         client_number = client_number.iloc[0]                                                    # Get the client number               
     else:
-        print("Client not found\n")
+        print("\nClient not found\n")
         analyse_sales()
         return
 
@@ -27,11 +27,14 @@ def analyse_sales():
     print("Here is the maximum spend for a sale : ", round(max_spent, 2))
     print("Here is the sum of all the sales : ", round(sum, 2))
 
-    choice = input("\nWould you like to continue ? (y or n)")
-    if choice == "y":
-        analyse_sales()
-    else:
-        show_excel()
+    while True:                                                                                 # While loop to keep the question open
+        choice = input("\nWould you like to continue ? (y or n)")                               # Ask if the user wants to continue (only accept y or n)   
+        if choice == "y":
+            analyse_sales()
+        elif choice == "n":
+            show_excel()
+        else:
+            print("Invalid option\n")
 
 def excel_sales():
     data = pd.read_excel("clients_sales.xlsx", sheet_name = "sales")        # Read the sales sheet from the excel file
@@ -57,7 +60,7 @@ def show_excel():                                                           # Fu
         elif choice == "3":
             analyse_sales()
         elif choice == "4":
-            break
+            main()
         else:
             print("Invalid option\n")
 
